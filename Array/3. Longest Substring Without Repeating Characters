@@ -3,7 +3,7 @@ https://leetcode.com/problems/longest-substring-without-repeating-characters/
 Original Code
 
 
-```
+<code>
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         if len(s) <= 1:
@@ -27,5 +27,5 @@ class Solution:
                         current_string.append(s[i])
                         break
         return length  
-```
+</code> 
 
