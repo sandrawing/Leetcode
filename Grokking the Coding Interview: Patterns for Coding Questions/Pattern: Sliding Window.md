@@ -7,17 +7,17 @@ Given an array of positive numbers and a positive number ‘k’, find the maxim
 
 1. My solution
 
-``ruby
+```ruby
 def max_sub_array_of_size_k(k, arr):
   max_sum = 0
   for i in range(len(arr) - k):
     max_sum = max(max_sum, sum(arr[i:i+k]))
   return max_sum
-``
+```
 
 2. Answer
 
-``ruby
+```ruby
 def max_sub_array_of_size_k(k, arr):
   max_sum , window_sum = 0, 0
   window_start = 0
@@ -37,4 +37,4 @@ def main():
   print("Maximum sum of a subarray of size K: " + str(max_sub_array_of_size_k(2, [2, 3, 4, 1, 5])))
 
 main()
-``
+```
