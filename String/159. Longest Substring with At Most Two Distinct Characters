@@ -25,3 +25,87 @@ class Solution:
 小于3的给单独拎出来），然后具体的判断中也遇到了很多问题，因为是不大于2，得考虑是1的情况，可能到最后遍历完整个string也都没有到dist_num是2的情况，可能最多
 是1。
 
+如果用hashmap，对如何最优化更新也存在具体执行时候的疑惑，如果是"ccaabb"，遇到b的最优化的更新是放在第一个出现a的地方，如果"cacba"，那么遇到b最优化
+更新是放在第二个出现c的地方。
+
+思考了之后得出的答案
+
+```ruby
+class Solution:
+    def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
+        if len(s) < 3:
+            return len(s)
+        else:
+            start = 0
+            dis_num = 1
+            index_map = {s[0]: 0}
+            result = 1
+            for end in range(1, len(s)):
+                # 更新map的条件是是否出现连续相同的字符 如果一直都是cccc则不用更新 如果是ccac则a和c都要更新
+                if s[end] != s[end - 1]:
+                    index_map[s[end]] = end
+                # track distinct number
+                if s[end] not in s[start:end]:
+                    dis_num += 1
+                if dis_num <= 2:
+                    result = max(result, end - start + 1)
+                else:
+                    start = index_map[s[end - 1]]
+                    dis_num -= 1     
+        return result
+```
+
+2. Leetcode Solution
+
+答案这个
+
+Algorithm
+
+Return N if the string length N is smaller than 3.
+
+Set both set pointers in the beginning of the string left = 0 and right = 0 and init max substring length max_len = 2.
+
+While right pointer is less than N:
+
+If hashmap contains less than 3 distinct characters, add the current character s[right] in the hashmap and move right pointer to the right.
+
+If hashmap contains 3 distinct characters, remove the leftmost character from the hashmap and move the left pointer so that sliding window contains again 2 distinct characters only.
+
+Update max_len.
+
+```ruby
+from collections import defaultdict
+class Solution:
+    def lengthOfLongestSubstringTwoDistinct(self, s: 'str') -> 'int':
+        n = len(s) 
+        if n < 3:
+            return n
+        
+        # sliding window left and right pointers
+        left, right = 0, 0
+        # hashmap character -> its rightmost position 
+        # in the sliding window
+        hashmap = defaultdict()
+
+        max_len = 2
+        
+        while right < n:
+            # slidewindow contains less than 3 characters
+            if len(hashmap) < 3:
+                hashmap[s[right]] = right
+                right += 1
+
+            # slidewindow contains 3 characters
+            if len(hashmap) == 3:
+                # delete the leftmost character
+                del_idx = min(hashmap.values())
+                del hashmap[s[del_idx]]
+                # move left pointer of the slidewindow
+                left = del_idx + 1
+
+            max_len = max(max_len, right - left)
+
+        return max_len
+ ```
+ 
+ 
