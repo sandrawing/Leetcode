@@ -115,7 +115,29 @@ Problem 4
 
 Leetcode 159
 
+My solution 
+
+```ruby
+def fruits_into_baskets(fruits):
+  # TODO: Write your code here
+  if len(fruits) < 3:
+    return len(fruits)
+  index_dict = {fruits[0]: 0}
+  max_len = 1
+  start = 0
+  for end in range(len(fruits)):
+    index_dict[fruits[end]] = end
+    if len(index_dict) > 2:
+      del_idx = min(index_dict.values())
+      del index_dict[fruits[del_idx]]
+      start = del_idx + 1
+    max_len = max(max_len, end - start + 1)
+  return max_len
+ ```
+
 Problem 5
 
+Leetcode 3
 
+Problem 6
 
