@@ -155,7 +155,7 @@ class Solution(object):
                 if maps[s[begin]] == 0:
                     counter -= 1
                 begin += 1
-            length = max(length, end - begin) # 因此这里是```end - begin```而不是```end - begin + 1```
+            length = max(length, end - begin) # 因此这里是end - begin而不是end - begin + 1
         return length
    ```
  
