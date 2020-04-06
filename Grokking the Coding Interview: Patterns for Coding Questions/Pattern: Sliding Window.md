@@ -15,7 +15,7 @@ def max_sub_array_of_size_k(k, arr):
   return max_sum
 ```
 
-2. Answer
+2. Solution
 
 ```ruby
 def max_sub_array_of_size_k(k, arr):
@@ -35,6 +35,62 @@ def max_sub_array_of_size_k(k, arr):
 def main():
   print("Maximum sum of a subarray of size K: " + str(max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2])))
   print("Maximum sum of a subarray of size K: " + str(max_sub_array_of_size_k(2, [2, 3, 4, 1, 5])))
+
+main()
+```
+
+Problem 2
+
+Given an array of positive numbers and a positive number ‘S’, find the length of the smallest contiguous subarray whose sum is greater than or equal to ‘S’. Return 0, if no such subarray exists.
+
+1. My Solution
+
+```ruby
+def smallest_subarray_with_given_sum(s, arr):
+  # TODO: Write your code here
+  length = 0
+  i, j = 0, 0
+  while i < len(arr) and j < len(arr):
+    curr_sum = sum(arr[i:j+1])
+    if curr_sum >= s:
+      if length != 0:
+        length = min(length, j - i + 1)
+      else:
+        length = j - i + 1
+      i += 1
+    else:
+      j += 1
+  return length
+  ```
+  
+2. Solution
+  
+```ruby
+import math
+
+
+def smallest_subarray_with_given_sum(s, arr):
+  window_sum = 0
+  min_length = math.inf
+  window_start = 0
+
+  for window_end in range(0, len(arr)):
+    window_sum += arr[window_end]  # add the next element
+    # shrink the window as small as possible until the 'window_sum' is smaller than 's'
+    while window_sum >= s:
+      min_length = min(min_length, window_end - window_start + 1)
+      window_sum -= arr[window_start]
+      window_start += 1
+  if min_length == math.inf:
+    return 0
+  return min_length
+
+
+def main():
+  print("Smallest subarray length: " + str(smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 3, 2])))
+  print("Smallest subarray length: " + str(smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 8])))
+  print("Smallest subarray length: " + str(smallest_subarray_with_given_sum(8, [3, 4, 1, 1, 6])))
+
 
 main()
 ```
