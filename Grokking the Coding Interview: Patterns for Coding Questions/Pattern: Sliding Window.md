@@ -142,3 +142,81 @@ Leetcode 3
 Problem 6
 
 Leetcode 424
+
+Problem 7
+
+Longest Subarray with Ones after Replacement (hard)
+
+Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, find the length of the longest contiguous subarray having all 1s.
+
+My solution
+
+```ruby
+def length_of_longest_substring(arr, k):
+  # TODO: Write your code here
+  start = 0
+  count = {}
+  result = 0
+  for end in range(len(arr)):
+    if arr[end] in count:
+      count[arr[end]] += 1
+    else:
+      count[arr[end]] = 1
+    sum_len = sum(count.values())
+    if sum_len <= count.get(1, 0) + k:
+      result = max(result, sum_len)
+    else:
+      count[arr[start]] -= 1
+      start += 1
+  return result
+```
+
+Solution from Educative.io
+
+This problem follows the Sliding Window pattern and is quite similar to Longest Substring with same Letters after Replacement. The only difference is that, in the problem, we only have two characters (1s and 0s) in the input arrays.
+
+Following a similar approach, we’ll iterate through the array to add one number at a time in the window. We’ll also keep track of the maximum number of repeating 1s in the current window (let’s call it maxOnesCount). So at any time, we know that we can have a window which has 1s repeating maxOnesCount time, so we should try to replace the remaining 0s. If we have more than ‘k’ remaining 0s, we should shrink the window as we are not allowed to replace more than ‘k’ 0s.
+
+```ruby
+def length_of_longest_substring(arr, k):
+  window_start, max_length, max_ones_count = 0, 0, 0
+
+  # Try to extend the range [window_start, window_end]
+  for window_end in range(len(arr)):
+    if arr[window_end] == 1:
+      max_ones_count += 1
+
+    # Current window size is from window_start to window_end, overall we have a maximum of 1s
+    # repeating 'max_ones_count' times, this means we can have a window with 'max_ones_count' 1s
+    # and the remaining are 0s which should replace with 1s.
+    # now, if the remaining 1s are more than 'k', it is the time to shrink the window as we
+    # are not allowed to replace more than 'k' 0s
+    if (window_end - window_start + 1 - max_ones_count) > k:
+      if arr[window_start] == 1:
+        max_ones_count -= 1
+      window_start += 1
+
+    max_length = max(max_length, window_end - window_start + 1)
+  return max_length
+
+
+def main():
+  print(length_of_longest_substring([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2))
+  print(length_of_longest_substring(
+    [0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3))
+
+
+main()
+```
+
+Time Complexity #
+The time complexity of the above algorithm will be O(N) where ‘N’ is the count of numbers in the input array.
+
+Space Complexity #
+The algorithm runs in constant space O(1).
+
+
+Problem Challenge 1
+
+Leetcode 567
+
