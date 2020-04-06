@@ -97,12 +97,16 @@ main()
 ```
 
 Time Complexity #
-The time complexity of the above algorithm will be O(N). The outer for loop runs for all elements and the inner while loop processes each element only once, therefore the time complexity of the algorithm will be O(N+N) which is asymptotically equivalent to O(N).
+
+The time complexity of the above algorithm will be O(N). 
+
+The outer for loop runs for all elements and the inner while loop processes each element only once, therefore the time complexity of the algorithm will be O(N+N) which is asymptotically equivalent to O(N).
 
 The ‘while’ loop can iterate a maximum of ‘n’ times, as it is shrinking the sliding window (we can’t have more than ‘n’ executions of windowStart++). This means the overall time complexity will be O(n+n); ‘n’ for the ‘for’ loop and an ‘n’ for the ‘while’ loop. This is asymptotically equivalent to o(n).
 
 Space Complexity #
-The algorithm runs in constant space O(1)O(1).
+The algorithm runs in constant space O(1).
 
 Problem 3
+
 
