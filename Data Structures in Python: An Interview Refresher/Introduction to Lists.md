@@ -34,3 +34,41 @@ print(List)  # 1, 3, 5, 7, 9
 Line 3 uses the del function. Here, the empty start and end indices refer to 0 and length of the list by default, whereas 2 is the step size.
 
 We can use negative numbers to begin indexing the list elements from the end.
+
+**Array**
+
+In Python, an array is just an ordered sequence of homogeneous elements. In other words, an array can only hold elements of one datatype. Python arrays are basically just wrappers for C arrays. The type is constrained and specified at the time of creation.
+
+Initializing Arrays
+
+```ruby
+import array
+newArray = array.array('type', [list])
+```
+
+Here type defines the data type of array and list is a python list containing homogenous elements.
+
+```ruby
+import array
+
+# type: 'd' (float), initializer list: [1, 2, 3]
+newArray = array.array('d', [1, 2, 3])
+print(newArray[0])
+```
+
+Changing or adding array elements
+
+Arrays are mutable; their elements can be changed in the same way as list elements. Have a look at the following coding widget.
+
+```ruby
+import array
+integers = array.array('i', [1, 2, 3, 5, 7, 10])
+
+# changing first element
+integers[0] = 0
+print(integers)  # array('i', [0, 2, 3, 5, 7, 10])
+
+# changing 3rd to 5th element
+integers[2:5] = array.array('i', [4, 6, 8])
+print(integers)     # Output: array('i', [0, 2, 4, 6, 8, 10])
+```
