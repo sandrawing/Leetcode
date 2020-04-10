@@ -72,3 +72,32 @@ print(integers)  # array('i', [0, 2, 3, 5, 7, 10])
 integers[2:5] = array.array('i', [4, 6, 8])
 print(integers)     # Output: array('i', [0, 2, 4, 6, 8, 10])
 ```
+
+We can use the remove(val) method to remove the given item or pop(index) to remove an item at the given index. The remove(val) method removes the first element that is equal to val in the array.
+
+```ruby
+import array
+
+IntegerArray = array.array('i', [10, 11, 12, 12, 13])
+
+IntegerArray.remove(12)
+print(IntegerArray)   # array('i', [10, 11, 12, 13])
+
+print(IntegerArray.pop(2))   # Output: 12
+print(IntegerArray)   # array('i', [10, 11, 13])
+```
+
+**Lists vs Arrays**
+
+Differences #
+Python lists are very flexible and can hold completely heterogeneous arbitrary data, but they use a lot more space than Python arrays. Each list contains pointers to a block of pointers, each of which in turn points to a full Python object. Again, the advantage of the list is flexibility: because each list element is a full structure containing both data and type information, the list can be filled with data of any desired type. Arrays lack this flexibility but are much more efficient for storing and manipulating data.
+
+The differences between the two largely exist because of the aforementioned backend implementation. Arrays in Python are implemented just like C arrays, with a pointer pointing to the first element of the array with the rest existing contiguously in the memory.
+
+Similarities
+
+Arrays and lists are very similar in syntactical usage and functionality. Both are used to store data. Both are mutable, i.e., the data in both is not constant and can be modified. Both can also be indexed and iterated through. Both can be sliced and are in fact sliced the same way.
+
+When to use arrays and when to use lists
+
+Because of the way that lists are implemented, elements can be appended to them very efficiently. If you want your collection to grow and shrink in a time-efficient manner, then lists should be used. It’s also better to use lists if you need to manage lots of different data types, however, arrays are better when you need to store a lot of data and perform a large number of computationally intensive mathematical operations. Note that the arrays from the NumPy library of Python are better suited for mathematical use cases.
