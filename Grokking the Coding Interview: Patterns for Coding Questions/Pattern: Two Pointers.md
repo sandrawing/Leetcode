@@ -55,3 +55,35 @@ def main():
 
 main()
 ```
+
+Time Complexity #
+The time complexity of the above algorithm will be O(N), where ‘N’ is the total number of elements in the given array.
+
+Space Complexity #
+The algorithm runs in constant space O(1).
+
+Alternative Solution: Hash Table
+
+Instead of using a two-pointer or a binary search approach, we can utilize a HashTable to search for the required pair. We can iterate through the array one number at a time. Let’s say during our iteration we are at number ‘X’, so we need to find ‘Y’ such that “X + Y == Target”. We will do two things here:
+
+Search for ‘Y’ (which is equivalent to “Target - X”) in the HashTable. If it is there, we have found the required pair.
+Otherwise, insert “X” in the HashTable, so that we can search it for the later numbers.
+
+```ruby
+def pair_with_targetsum(arr, target_sum):
+  nums = {}  # to store numbers and their indices
+  for i, num in enumerate(arr):
+    if target_sum - num in nums:
+      return [nums[target_sum - num], i]
+    else:
+      nums[arr[i]] = i
+  return [-1, -1]
+
+
+def main():
+  print(pair_with_targetsum([1, 2, 3, 4, 6], 6))
+  print(pair_with_targetsum([2, 5, 9, 11], 11))
+
+
+main()
+```
