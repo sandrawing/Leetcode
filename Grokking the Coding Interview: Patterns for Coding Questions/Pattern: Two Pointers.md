@@ -198,3 +198,9 @@ def main():
 
 main()
 ```
+
+Time complexity #
+The time complexity of the above algorithm will be O(N).
+
+Space complexity #
+The algorithm runs in constant space O(1).
